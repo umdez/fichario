@@ -26,6 +26,10 @@
     }
   };
 
+  Usuario.prototype.adicEscopo = function(escopo) {
+    this.funcao.escopos.push(escopo);
+  };
+
   setInterval(function(){
     usuarios = usuarios.filter(function(item){
       return item.seValido();
