@@ -44,6 +44,14 @@
     return resultado[0];
   };
 
+  module.exports.seTokenForValido = function(token) {
+    var usuario = buscarUsuarioPeloToken(token);
+    if(usuario != undefined){
+      return usuario.seValido();
+    }
+    return false;
+  }
+
   module.exports.adicUsuario = function(opcoes) {
     var usuario = new Usuario(opcoes);
     usuarios.push(usuario);
