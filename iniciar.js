@@ -46,7 +46,7 @@
     return usuario;
   };
 
-  module.exports.setHoraDeExpiracao = function(minutos) {
+  module.exports.setaHoraDeExpiracao = function(minutos) {
     horaDeExpiracao = minutos;
   };
 
