@@ -3,15 +3,22 @@
   var usuarios = [];
   var expirationTime = 1;
 
-  function Usuario(token, uuid, nome){
-    this.token = token;
-    this.uuid = uuid;
+  function Usuario(opcoes){
+    this.token = opcoes.token;
+    this.uuid = opcoes.uuid;
     this.refreshed = null;
     //this.expires = null;
-    this.nome = nome;
+    this.nome = opcoes.nome;
     this.funcao = {"nome": null};
     this.funcao.escopos = null;
-    this.refresh();
+    //this.refresh();
+  };
+
+  module.exports.adicUsuario = function(opcoes) {
+    //removeUserByUsername(username);
+    var usuario = new Usuario(opcoes);
+    usuarios.push(usuario);
+    return usuario;
   };
 
 }());
