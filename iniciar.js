@@ -1,24 +1,53 @@
 (function() {
 
   var usuarios = [];
-  var expirationTime = 1;
+  var horaDeExpiracao = 1;
 
-  function Usuario(opcoes){
+  function Usuario(opcoes) {
     this.token = opcoes.token;
     this.uuid = opcoes.uuid;
-    this.refreshed = null;
-    //this.expires = null;
-    this.nome = opcoes.nome;
-    this.funcao = {"nome": null};
-    this.funcao.escopos = null;
-    //this.refresh();
+    this.expirar = new Date();
+    this.jid = opcoes.jid;
+    this.funcao = {
+      'nome': opcoes.funcao
+    , escopos: []
+    };
+  };
+
+  Usuario.prototype.seValido = function() {
+    if(this.token == undefined){
+      return false;
+    } else{
+      var exp = new Date(this.expirar.getTime());
+
+      exp.setMinutes(exp.getMinutes() + horaDeExpiracao);
+
+      return (exp.getTime() >= (new Date()).getTime());
+    }
+  };
+
+  setInterval(function(){
+    usuarios = usuarios.filter(function(item){
+      return item.seValido();
+    });
+  }, 10*60*1000);
+
+  var buscarUsuarioPeloToken = function (token){
+    var resultado = usuarios.slice(0);
+    resultado = resultado.filter(function(item){
+      return (item.token == token);
+    });
+    return resultado[0];
   };
 
   module.exports.adicUsuario = function(opcoes) {
-    //removeUserByUsername(username);
     var usuario = new Usuario(opcoes);
     usuarios.push(usuario);
     return usuario;
+  };
+
+  module.exports.setHoraDeExpiracao = function(minutos) {
+    horaDeExpiracao = minutos;
   };
 
 }());
