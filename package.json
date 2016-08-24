@@ -1,0 +1,24 @@
+{
+  "name": "fichario",
+  "version": "0.0.1-Beta",
+  "description": "Um fichario com informações sensiveis dos usuários.",
+  "main": "iniciar.js",
+  "keywords": [
+    "escopos",
+    "funcoes",
+    "sessao",
+    "token",
+    "usuarios",
+    "expirar"
+  ],
+  "author": "Leo Felippe <leofelippedias@hotmail.com.br>",
+  "license": "UNLICENSED",
+  "dependencies": {
+
+  },
+  "private": true,
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "bin": "./iniciar.js"
+}
