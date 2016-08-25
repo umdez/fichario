@@ -1,7 +1,5 @@
 (function() {
 
-  var _ = require("lodash");
-
   var usuarios = [];
   var horaDeExpiracao = 1;
 
@@ -12,7 +10,7 @@
     this.jid = opcoes.jid;
     this.funcao = {
       'nome': opcoes.funcao
-    , escopos: []
+    , 'escopos': []
     };
   };
 
@@ -50,7 +48,7 @@
     var usuario = buscarUsuarioPeloToken(token);
     if(usuario != undefined){
       if (usuario.funcao && usuario.funcao.escopos && usuario.funcao.escopos[modelo]) {
-        var bandeira = _.toNumber(usuario.funcao.escopos[modelo].bandeira);
+        var bandeira = usuario.funcao.escopos[modelo].bandeira;
         return bandeira & permissao;
       }
     }
