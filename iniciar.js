@@ -1,5 +1,7 @@
 (function() {
 
+  var _ = require("lodash");
+
   var usuarios = [];
   var horaDeExpiracao = 1;
 
@@ -27,7 +29,7 @@
   };
 
   Usuario.prototype.adicEscopo = function(escopo) {
-    this.funcao.escopos.push(escopo);
+    this.funcao.escopos[escopo.nome] = escopo;
   };
 
   setInterval(function(){
@@ -42,6 +44,17 @@
       return (item.token == token);
     });
     return resultado[0];
+  };
+
+  module.exports.sePossuiPermissao = function(token, modelo, permissao) {
+    var usuario = buscarUsuarioPeloToken(token);
+    if(usuario != undefined){
+      if (usuario.funcao && usuario.funcao.escopos && usuario.funcao.escopos[modelo]) {
+        var bandeira = _.toNumber(usuario.funcao.escopos[modelo].bandeira);
+        return bandeira & permissao;
+      }
+    }
+    return false;
   };
 
   module.exports.seTokenForValido = function(token) {
