@@ -1,4 +1,3 @@
-# fichario
 Já que não é uma boa opção mantermos esse tipo de informação nos tokens (JWT), então tive que adicionar este projeto. Com ele, todos usuários possuirão uma ficha com informações sensiveis de escopos e todo o resto necessário.
 
 ## Como funciona
@@ -16,24 +15,19 @@ var ficha = meuObj.fichario.adicUsuario({
     'token': token
   , 'uuid': uuid
   , 'jid': 'usuario@localhost'
-  , 'estatos': 0x00000001
+  , 'estatos': 0x00000001  // Verificado? Bloqueado?
   , 'funcao': {
       'nome': 'Gerente',
       'escopos': [] 
   }
 });
 
-// Podemos adicionar cada um dos escopos que este usuário tem. Cada escopo possui informações como a bandeira de acesso.
+// Podemos adicionar cada um dos escopos que este usuário tem.
+// Cada escopo possui informações como a bandeira de acesso.
 ficha.adicEscopo({
   'id': 1
-, 'nome': 'USUARIOS'
-, 'bandeira': 0x00000001  
-});
-
-ficha.adicEscopo({
-  'id': 2
-, 'nome': 'PACIENTES'
-, 'bandeira': 0x00000001
+, 'nome': 'USUARIOS'      // Um nome de uma tabela qualquer.
+, 'bandeira': 0x00000001  // (Criar|Deletar|Acessar|Atualizar)
 });
 
 ```
