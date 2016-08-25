@@ -8,6 +8,7 @@
     this.uuid = opcoes.uuid;
     this.expirar = new Date();
     this.jid = opcoes.jid;
+    this.estatos = opcoes.estatos;
     this.funcao = {
       'nome': opcoes.funcao
     , 'escopos': []
@@ -44,13 +45,22 @@
     return resultado[0];
   };
 
-  module.exports.sePossuiPermissao = function(token, modelo, permissao) {
+  module.exports.sePossuiEscopo = function(token, modelo, permissao) {
     var usuario = buscarUsuarioPeloToken(token);
     if(usuario != undefined){
       if (usuario.funcao && usuario.funcao.escopos && usuario.funcao.escopos[modelo]) {
         var bandeira = usuario.funcao.escopos[modelo].bandeira;
         return (bandeira & permissao);
       }
+    }
+    return false;
+  };
+
+  module.exports.sePossuiEstatos = function(token, estatos) {
+    var usuario = buscarUsuarioPeloToken(token);
+    if(usuario != undefined){
+      var bandeira = usuario.estatos;
+      return (bandeira & estatos);
     }
     return false;
   };
