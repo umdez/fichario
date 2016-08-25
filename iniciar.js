@@ -50,7 +50,7 @@
       if (usuario.funcao && usuario.funcao.escopos && usuario.funcao.escopos[modelo]) {
         var bandeira = usuario.funcao.escopos[modelo].bandeira;
         console.log('BAnd :::: '+ bandeira);
-        return bandeira; //bandeira & permissao
+        return true; //bandeira & permissao
       }
     }
     return false;
