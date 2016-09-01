@@ -39,6 +39,13 @@ Após adicionar a ficha do usuario, nós podemos realizar a verificação de esc
 var sePermitido = (ficha.sePossuiEscopo(token, modelo, permissao) != 0);
 ```
 
+## Estatos de determinada conta de usuario
+Caso seja necessário realizar a verificação do estatos atual do usuario nós podemos utilizar um verificador de estatos. Abaixo temos
+um exemplo:
+```javascript
+var seTiverUmEstatos = (ficha.sePossuiEstatos(token, estatos) != 0);
+```
+
 ## Créditos
 - Todos os contribuidores do projeto [api-token](https://github.com/laardee/api-token), pois ele foi uma fonte de inspiração.
 - Todos os contribuidores da [Devowly Sistemas](https://github.com/orgs/devowly/people).
