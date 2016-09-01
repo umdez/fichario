@@ -11,7 +11,7 @@ var fichario = require('fichario');
 fichario.setaHoraDeExpiracao(15); 
 
 // Criamos uma ficha para o usuário onde ele será identificado pelo token.
-var ficha = meuObj.fichario.adicUsuario({
+var ficha = fichario.adicUsuario({
     'token': token
   , 'uuid': uuid
   , 'jid': 'usuario@localhost'
@@ -29,7 +29,14 @@ ficha.adicEscopo({
 , 'nome': 'USUARIOS'      // Um nome de uma tabela qualquer.
 , 'bandeira': 0x00000001  // (Criar|Deletar|Acessar|Atualizar)
 });
+```
 
+## Proteção de Escopos
+Após adicionar a ficha do usuario, nós podemos realizar a verificação de escopos para protegermos rotas do [Restificando](https://github.com/umdez/restificando/).
+
+```javascript
+// Agora podemos verificar as credenciais de acessos a escopos protegidos.
+var sePermitido = (ficha.sePossuiEscopo(token, modelo, permissao) != 0);
 ```
 
 ## Créditos
