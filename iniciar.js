@@ -20,9 +20,7 @@
       return false;
     } else{
       var exp = new Date(this.expirar.getTime());
-
       exp.setMinutes(exp.getMinutes() + horaDeExpiracao);
-
       return (exp.getTime() >= (new Date()).getTime());
     }
   };
@@ -45,7 +43,6 @@
     var usuario = buscarUsuarioPeloToken(token);
     if(usuario != undefined){
       usuario.funcao.escopos[escopo.nome] = escopo;
-      console.log(usuario.funcao.escopos[escopo.nome]);
     }
   };
 
@@ -91,10 +88,9 @@
   };
 
   module.exports.removerFicha = function(token) {
-    var usuario = buscarUsuarioPeloToken(token);
-    if(usuario != undefined){
-      delete usuario;
-    }
+    usuarios = usuarios.filter(function(ficha){
+      return (ficha.token != token);
+    });
   };
 
   module.exports.setaHoraDeExpiracao = function(minutos) {
