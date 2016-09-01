@@ -27,10 +27,6 @@
     }
   };
 
-  Usuario.prototype.adicEscopo = function(escopo) {
-    this.funcao.escopos[escopo.nome] = escopo;
-  };
-
   setInterval(function(){
     usuarios = usuarios.filter(function(item){
       return item.seValido();
@@ -43,6 +39,20 @@
       return (item.token == token);
     });
     return resultado[0];
+  };
+
+  module.exports.adicEscopo = function(token, escopo) {
+    var usuario = buscarUsuarioPeloToken(token);
+    if(usuario != undefined){
+      usuario.funcao.escopos[escopo.nome] = escopo;
+    }
+  };
+
+  module.exports.limparEscopos = function(token) {
+    var usuario = buscarUsuarioPeloToken(token);
+    if(usuario != undefined){
+      usuario.funcao.escopos = [];
+    }
   };
 
   module.exports.sePossuiEscopo = function(token, modelo, permissao) {
@@ -77,6 +87,13 @@
     var usuario = new Usuario(opcoes);
     usuarios.push(usuario);
     return usuario;
+  };
+
+  module.exports.removerFicha = function(token) {
+    var usuario = buscarUsuarioPeloToken(token);
+    if(usuario != undefined){
+      delete usuario;
+    }
   };
 
   module.exports.setaHoraDeExpiracao = function(minutos) {
