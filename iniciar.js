@@ -45,6 +45,7 @@
     var usuario = buscarUsuarioPeloToken(token);
     if(usuario != undefined){
       usuario.funcao.escopos[escopo.nome] = escopo;
+      console.log(usuario.funcao.escopos[escopo.nome]);
     }
   };
 
